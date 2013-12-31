@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Mobile App</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="css/mobile_style.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile.js"></script>
+    <script type="text/javascript" src="js/modernizr-2.0.6.min.js"></script>
+    <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script>
+        $(function () {
+            getLicenceData();
+            
+
+        });
+    </script>
+</head>
+<body>
+    <input type="hidden" id="menupage" value="true" />
+    <input type="hidden" id="userSiteId" value="" />
+
+    <div data-role="page" data-theme="a">
+        <div data-role="header"  class="header-content">
+          <a data-rel="back" data-role="button" data-icon="arrow-l">Back</a>
+            <h1>More</h1>
+            <a href="index.html" data-icon="home" data-ajax="false" class="ui-btn-right">Home</a>
+        </div>
+        <!-- /header -->
+        <div data-role="content" id="main-content">
+            <ul data-role="listview" data-inset="false"  id="liMenu" data-divider-theme="">
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

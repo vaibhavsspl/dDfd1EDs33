@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mobile App</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="css/mobile_style.css" />
+    <link href="css/custom-mobile-theme.css" rel="stylesheet" type="text/css" />
+	
+    <style type="text/css">
+        .ui-page
+        {
+            -webkit-backface-visibility: hidden;
+        }
+
+        .icon_img
+        {
+            display: block;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile.js"></script>
+    <script type="text/javascript" src="js/modernizr-2.0.6.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	        emailFormsubmission();
+	    });
+    </script>
+	</head>
+	<body>
+		<div data-role="page" data-theme="c">
+			<div data-role="header" role="banner" class="header-content">
+				 <a data-rel="back" data-role="button" data-icon="arrow-l">Back</a>
+				<h1>Email Form</h1>
+				
+			</div>
+		   <div data-role="content" id="main-content" class="nopadx">
+            <div id="Elements" class="jqm">				
+					<form id="emailformsubmit" action="" name="emailformsubmit" method="post" data-ajax="false" >
+						
+					</form>
+				<div class="Navigation bottom">
+				</div>
+			</div>
+				</div>	
+    
+			</div>
+	
+</body>
+	</html>

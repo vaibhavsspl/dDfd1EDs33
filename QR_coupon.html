@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<title>MobileApp</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="MyRestro">
+<meta name="apple-itunes-app" content="app-id=">
+
+<link rel="apple-touch-icon" href="uploads/icons/152026.png">
+<link rel="apple-touch-startup-image" href="uploads/splash_shots/152026.png">
+<link rel="stylesheet" type="text/css" href="css/mobile_style.css">
+<link href="css/jquery.bxslider.css" rel="stylesheet" />
+
+<style type="text/css">
+</style>
+
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/script.js" type="text/javascript"></script>
+<script src="cordova.js" type="text/javascript"></script>
+<script type="text/javascript" src="barcodescanner.js"></script>
+<script src="js/jquery.nicescroll.min.js"></script>
+<script src="js/jquery.bxslider.js"></script>
+<script type="text/javascript" src="js/jquery.mobile.js"></script>
+<script type="text/javascript">
+		$(document).ready(function() {
+		var qrCode = getUrlVars()['qrCode'];
+		var hrsCheck = getUrlVars()['hrsCheck'];
+		var checkInTargetAmt = getUrlVars()['checkInTargetAmt'];
+		$('.btn-text').click(function(){
+				console.log('scanning');
+				//alert('coming');
+				try {
+				   var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+				  // alert(scanner);
+				   scanner.scan(
+				   function (result) {
+				   if(qrCode == result.text)
+					{
+					checkInTargetAmt++;
+					
+					alert("success");
+					var coupon_counter=$('#coupon-counter').val();
+					coupon_counter++;
+					for(var i=1;i<=coupon_counter;i++)
+					{
+					$('.coupon_counter').html(i+'/'+checkInTargetAmt);
+					}
+					$('#coupon-counter').val(coupon_counter);
+					}
+					else
+					{
+					alert("Wrong QR code");	
+					checkInTargetAmt++;
+					}
+				   /*alert("We got a barcode\n" +
+				   "Result: " + result.text + "\n" +
+				   "Format: " + result.format + "\n" +
+				   "Cancelled: " + result.cancelled);*/
+				   }, 
+				   function (error) {
+				   alert("Scanning failed: " + error);
+				   }
+				   );
+
+				} catch (ex) {
+					alert(ex.message);
+					console.log(ex.message);
+					
+				}
+			})
+			
+		})
+
+</script>
+
+
+</head>
+<body>
+<input type="hidden" id="coupon-counter" value="0"/>
+<div data-role="page">
+    <div data-role="header" role="banner">
+    <a href="#" data-icon="back" data-rel="back">Back</a>
+       <h1>QR Coupon</h1>
+</div><!-- /header -->
+	<div data-role="content" id="main_content" class="padding-off">
+    
+    <div class="QRbg ui-content">
+
+    	<div class="qr_lock">
+        	<div class="coupon_counter">
+            
+            </div>
+        </div>
+    </div>
+    <div class="QR_box">
+    	<div class="coupon_text">
+        	<h3>Coupon Name</h3>
+            <p>You need to check in another 3 times before you can use this coupon</p>
+           <div class="share_toggle">
+           	 <span>Share</span>
+            <select name="share" id="share" data-role="slider" >
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+           </div>
+           </div>
+    	<div class="roundbutton btn">
+        <span class="btn-text" id="shareit" data-position-to="window" data-transition="slideup" data-rel="popup" data-role="none">Scan QR</span>
+        </div>
+        
+        </div>
+
+
+  </div><!-- /content -->
+<div data-role="popup" id="sharecoupon" data-overlay-theme="a" data-dismissible="false" data-theme="c" class="ui-corner-all" style="width:320px;">
+       		<div data-role="header" data-theme="b" class="ui-corner-top ">
+		        <h5 class="nowrap">Choose Login Account</h5>
+        	</div>
+            <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" >
+                    <a href="" data-role="button" data-theme="b">Facebook</a>
+                    <a href="" data-role="button" data-theme="b">Twitter</a>
+                    <a href="" data-role="button" data-theme="a" data-rel="back">Cancel</a>
+                    
+            </div>
+        </div>
+	
+
+<!-- /footer -->
+</div><!-- /page -->
+
+</body>
+</html>

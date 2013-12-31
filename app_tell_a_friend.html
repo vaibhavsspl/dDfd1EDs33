@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Tell a friend</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/mobile_style.css">
+    <link rel="stylesheet" type="text/css" href="css/photoswipe.css">
+    <style type="text/css">
+        .ui-page
+        {
+            -webkit-backface-visibility: hidden;
+        }
+
+        .icon_img
+        {
+            display: block;
+            text-align: center;
+        }
+    </style>
+	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile.js"></script>
+    <script type="text/javascript" src="js/modernizr-2.0.6.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+    
+
+    <script type="text/javascript" charset="utf-8">
+
+        // Wait for Cordova to load
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        // Global InAppBrowser reference
+        var iabRef = null;
+
+        function iabLoadStart(event) {
+            alert(event.type + ' - ' + event.url);
+        }
+
+        function iabLoadStop(event) {
+            alert(event.type + ' - ' + event.url);
+        }
+
+        function iabClose(event) {
+            alert(event.type);
+            iabRef.removeEventListener('loadstart', iabLoadStart);
+            iabRef.removeEventListener('loadstop', iabLoadStop);
+            iabRef.removeEventListener('exit', iabClose);
+        }
+
+        // Cordova is ready
+        //
+        function onDeviceReady() {
+
+            iabRef.addEventListener('loadstart', iabLoadStart);
+            iabRef.addEventListener('loadstop', iabLoadStop);
+            iabRef.addEventListener('exit', iabClose);
+        }
+
+        function openInNewWindow(btn) {
+            var url = $(btn).attr('url');
+            iabRef = window.open(url, '_blank', 'location=yes','closebuttoncaption=Back');
+        }
+        
+    </script>
+
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            var gmailUrl = "mailto:?subject=my new iphone app&amp;body=Check out the iPhone app @ <a href='http://www.appstore.com/'>http://www.appstore.com/</a>";
+            var twitterUrl = "https://twitter.com/intent/tweet?url=http://www.appstore.com/&text=Check out the iPhone app";
+            var facebookUrl = "https://www.facebook.com/dialog/feed?app_id=458358780877780&link=https://developers.facebook.com/docs/reference/dialogs/";
+            facebookUrl += "&redirect_uri=https://mighty-lowlands-6381.herokuapp.com/";
+
+            $('#anchorFB').attr('url', facebookUrl);
+            $('#anchorTW').attr('url', twitterUrl);
+            $('#anchorMAIL').attr('url', gmailUrl);
+            $('#anchorMAIL').attr('href', gmailUrl);
+			  tellaFriend();
+        });
+
+    </script>
+</head>
+<body>
+
+    <input type="hidden" id="userSiteId" value="">
+    <input type="hidden" id="lastClick" value="">
+    <a id="addSteps" href="#fanwallPopup" onclick="" data-position-to="window" data-rel="popup"></a>
+    <input type="hidden" id="BackSteps" value="1">
+    <div data-role="page">
+        <div data-role="header" role="banner" class="header-content">
+            <a data-rel="back" data-role="button" data-icon="arrow-l">Back</a>
+            <h1>Tell a friend</h1>
+            <a href="index.html" data-icon="home" data-ajax="false" class="ui-btn-right">Home</a>
+
+        </div>
+        <!-- /header -->
+
+
+        <div data-role="content" id="main-content">
+
+
+            <ul data-role="listview" data-divider-theme="b" data-inset="true" id="ulShare">
+                <li data-role="list-divider" role="heading">Share App
+                </li>
+                <li data-theme="c">
+                    <a id="anchorMAIL"  data-transition="slide">via Email
+                    </a>
+                </li>
+                <li data-theme="c">
+                    <a id="anchorFB" onclick="openInNewWindow(this)">via Facebook
+                    </a>
+                </li>
+                <li data-theme="c">
+                    <a id="anchorTW" onclick="openInNewWindow(this)" data-transition="slide">via Twitter
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- /content -->
+    </div>
+    <!-- /page -->
+
+</body>
+</html>

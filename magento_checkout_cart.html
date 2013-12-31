@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="shortcut icon" href="images/favicon.ico" />
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
+    <link rel="stylesheet" type="text/css" href="css/mobile_style.css" />
+    <link rel="stylesheet" type="text/css" href="css/photoswipe.css" />
+    <style type="text/css">
+        .ui-page
+        {
+            -webkit-backface-visibility: hidden;
+        }
+
+        .icon_img
+        {
+            display: block;
+            text-align: center;
+        }
+
+        .success
+        {
+            background-color: green;
+            border: 1px solid #E1E16D;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 0 6px #DDDDDD;
+            color: #FFFFFF;
+            display: none;
+            font-size: 12px;
+            height: 15px;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile.js"></script>
+    <script type="text/javascript" src="js/modernizr-2.0.6.min.js"></script>
+    <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/klass.min.js"></script>
+	<script type="text/javascript" src="js/merchandise.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            merchandisecheckoutcart();
+			setform();
+			$('#takeout,#is_delivery,#cash,#paypal').click(function(){
+				setform();
+			});
+			$('#placeOrderForm').validate();
+			$('#btnCheckout').click(function(){
+				submitmagentoForm();
+			})
+		});
+		function setform(){
+			//alert($('#takeout').is(':checked'));
+			if($('#takeout').is(':checked')){
+				$('#takeout_form').show('slow');
+				$('#deliverycheck').slideUp();
+			}else{
+				//alert('dsa');
+				$('#deliverycheck').slideDown('slow');
+			}
+			setPaymentmethod();
+		}
+		function setPaymentmethod(){
+			if($('#cash').is(':checked')){
+						$('.paypal').hide();
+					}else{
+						$('.paypal').show();
+					}
+		}
+        
+    </script>
+    <style>
+        span.price
+        {
+            margin-left: 2px;
+        }
+
+        .error
+        {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+     <div data-role="page">
+        <div data-role="header" role="banner" class="header-content">
+            <div class="ui-block-b" data-role="controlgroup" data-type="horizontal">
+                <a data-rel="back" data-role="button" data-icon="arrow-l">Back</a>
+                <a href="#" id="cartlink" rel="external" data-role="button">Cart</a>
+            </div>
+            <h1>Cart</h1>
+            <a href="index.html" data-icon="home" data-ajax="false" class="ui-btn-right">Home</a>
+        </div>
+        <div data-role="content" >
+           <form  id="placeOrderForm" >
+			<input type="hidden" id="userSiteId" name="userSiteId" value=""/>
+			<input type="hidden" id="featureRelId" name="featureRelId" value=""/>
+			<input type="hidden" id="location" name="location" value=""/>
+			<input type="hidden" name="total" id="total" value="" />
+			<input type="hidden" name="totaltax" id="totaltax" value="0" />
+			<input type="hidden" name="sess_id" id="sess_id" value="0" />
+			<input type="hidden" name="deliveryFee" id="deliveryFee" value="0" />
+			
+            <div id="main-content" class="content-primary">
+                </div>
+				
+                    <div>
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-type="horizontal">
+                                <legend>Get Order by:</legend>
+                                <input type="radio" name="deliver" id="takeout" value="1" checked />
+                                <label for="takeout">
+                                    Takeout</label>
+                                <input type="radio" name="deliver" id="is_delivery"  value="2"   />
+                                <label for="is_delivery">
+                                    Delivery</label>
+                            </fieldset>
+                        </div>
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <legend>Pay Order by:</legend>
+                                <input type="radio" name="payment" id="cash" value="1" checked  />
+                                <label for="cash">
+                                    Cash</label>
+                                <input type="radio" name="payment" id="paypal" value="2"  />
+                                <label for="paypal">
+                                    Paypal</label>
+                            </fieldset>
+                        </div>
+                        
+                        <div id="takeout_form">
+							 	
+                            <div data-role="fieldcontain">
+                                <label for="fname">
+                                    First Name:</label>
+                                <input type="text" name="fname" id="fname" required="required" placeholder="First Name:"
+                                    value="" />
+                            </div>
+                            <div data-role="fieldcontain">
+                                <label for="lname">
+                                    Last Name:</label>
+                                <input type="text" name="lname" id="lname" required="required" placeholder="Last Name:"
+                                    value="" />
+                            </div>
+                            <div data-role="fieldcontain">
+                                <label for="pnum">
+                                    Phone Number:</label>
+                                <input type="text" name="pnum" id="pnum" required="required" placeholder="Phone Number:"
+                                    value="" />
+                            </div>
+							<div data-role="fieldcontain" class="paypal">
+                                <label for="cardType">
+                                    Card Type:</label>
+									<select name="cardType" id="cardType" required="required" placeholder="Card Type:">
+										<option value="credit card">credit card</option>
+										<option value="Visa">Visa</option>
+										<option value="MasterCard">MasterCard</option>
+										<option value="Discover">Discover</option>
+									</select>
+                               
+                            </div>
+							 <div data-role="fieldcontain" class="paypal">
+                                <label for="accNo">
+                                    Account Number:</label>
+                                <input type="text" name="accNo" id="accNo" required="required" placeholder="Account Number:" value=""  />
+                            </div>
+							 <div data-role="fieldcontain" class="paypal">
+                                <label for="cvvId">
+                                    CVV2:</label>
+                                <input type="text" name="cvvId" id="cvvId" required="required" placeholder="CVV2:"
+                                    value="" maxlength="3"/>
+                            </div>
+							 <div data-role="fieldcontain"  class="paypal">
+                                <label for="expiredOn">
+                                    ExpiredOn:</label>
+                                <input type="text" name="expiredOn" id="expiredOn" required="required" placeholder="MMYYYY"  value=""/>
+                            </div>
+                        </div>
+                        <div id="deliverycheck" style="display: none;">
+                            <div data-role="fieldcontain">
+                                <label for="addr1">
+                                    Street Address1:</label>
+                                <input type="text" name="addr1" id="addr1" required="required" placeholder="Street Address1:"
+                                    value="" />
+                            </div>
+                            <div data-role="fieldcontain">
+                                <label for="addr2">
+                                    Street Address2:</label>
+                                <input type="text" name="addr2" id="addr2" placeholder="Street Address2:" value="" />
+                            </div>
+                            <div data-role="fieldcontain">
+                                <label for="city">
+                                    City:</label>
+                                <input type="text" name="city" id="city" placeholder="City:" required="required"
+                                    value="" />
+                            </div>
+                            <div data-role="fieldcontain">
+                                <label for="state">
+                                    State:</label>
+                                <input type="text" name="state" id="state" placeholder="State:" required="required"
+                                    value="" />
+                            </div>
+							<div data-role="fieldcontain">
+                                <label for="country">
+                                    Country:</label>
+                                <input type="text" name="country" id="country" placeholder="Country:" required="required"
+                                    value="" />
+                            </div>
+                            <div data-role="fieldcontain">
+                                <label for="zipcode">
+                                    Postal Code:</label>
+                                <input type="text" name="zipcode" id="zipcode" required="required" placeholder="Postal Code:"
+                                    value="" />
+                            </div>
+                            <div data-role="fieldcontain">
+                                <label for="email">
+                                    Email:</label>
+                                <input type="email" name="email" id="email" required="required" placeholder="Email:"
+                                    value="" />
+                            </div>
+                        </div>
+                        <div>
+                            <fieldset>
+                                <div>
+                                    <button type="button" id="btnCheckout"  value="submit" data-theme="a">Check Out</button>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+				</form>
+            </div>
+        </div>
+    </div>
+    <!-- /page -->
+</body>
+</html>

@@ -1,0 +1,301 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+h3#form_Title,h5#form_Desc {
+	margin:0px 0px 5px;
+}
+/* jQuery Mobile Theme Form Elements */
+ul.tabs li {text-transform:uppercase;}
+.position-fixed {position:fixed;}
+
+.formContent{width:350px;}
+
+.jqm .ui-btn-inner {
+	font-size: 0.9em;
+}
+
+.jqm {
+	padding: 5px;
+}
+
+.jqm ul{
+	margin: 0px;
+	padding:0px;
+	list-style:none;
+}
+
+.jqm ul li{
+	padding:0px;
+	margin:10px 0px;
+	position:relative;
+}
+
+/*.jqm ul li.active {
+	border:1px solid #aaa;
+	background:#f2f2f8;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	-o-border-radius:5px;
+	-ms-border-radius:5px;
+}*/
+.jqm ul li .element_div .helpMark,
+.jqm ul li .element_div.threeinputs .helpMark {
+	position: absolute;
+	right: 6px;
+	top: 15px;	
+	width:16px;
+	height: 16px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 5px;
+    background: url(../images/help.png) no-repeat;
+}
+.jqm ul li .element_div label
+{
+	display: inline-block;
+	margin: 10px 0px;
+	margin-right: 4px;
+}
+.jqm ul li .element_div .ui-checkbox label,
+.jqm ul li .element_div .ui-radio label
+{
+	display: block;
+}
+.jqm ul li .element_div.fourinputs  div.ui-input-text{
+	width: 25px;
+}
+
+.jqm ul li .element_div.threeinputs span{
+	width: 24%;
+}
+.jqm ul li .element_div.fourinputs span,
+.jqm ul li .element_div.threeinputs span{
+	display:inline-block;
+	vertical-align:top;
+}
+
+.jqm ul li .element_div b.v_middle{
+	display:inline-block;
+	line-height:47px;
+}
+.jqm ul li .element_div .pricename{
+	position:relative;
+}
+.jqm ul li .element_div .pricename div.ui-input-text {
+	margin-left:15px;
+	
+}
+.jqm ul li .element_div .pricename .priceN{
+	position:absolute;
+	top: -5px;
+	left: 110%;
+}
+
+.jqm ul li .element_div .pricename .price_ico {
+	position:absolute;
+	top: -5px;
+	left:0px;
+	
+}
+
+.jqm ul li .element_div span.two {
+	display:inline-block;
+	width: 48%;
+	vertical-align:top;
+}
+
+.jqm ul li .element_div	label {font-size:16px;}
+.jqm ul li .element_div	label.label_bottom{font-size:13px; word-break: break-word;}
+
+
+.jqm ul li .element_div span > label,
+.jqm ul li .element_div.twoinputs > label,
+.jqm ul li .element_div.threeinputs > label{
+	display:inline-block;
+	margin-bottom:5px;
+	margin-top: 0px;
+	
+}
+
+
+.jqm ul li .element_div{
+	padding:5px;
+}
+
+.jqm ul li .element_div .checkboxes_div {
+	display:block;
+}
+
+.jqm ul li .element_div .radio_div {
+	display:block;
+}
+
+.jqm ul li .element_div input.ui-input-text {width:100%; box-shadow: none;}
+
+.jqm ul li .element_div select {width:100%;}
+.jqm ul li .element_div textarea {margin:0px;}
+
+.jqm ul li .element_div textarea.small { height:50px;}
+.jqm ul li .element_div textarea.medium { height:150px;}
+.jqm ul li .element_div textarea.large { height:200px;}
+
+.jqm ul li .element_div .selectDropdown.small,
+.jqm ul li .element_div .c1.small{
+	width:25%;
+	margin-bottom:0px;
+}
+
+.jqm ul li .element_div .selectDropdown.medium,
+.jqm ul li .element_div .c1.medium {
+	width:50%;
+	margin-bottom:0px;
+}
+
+.jqm ul li .element_div .selectDropdown.large,
+.jqm ul li .element_div .c1.large  {
+	width:97%;
+	margin-bottom:0px;
+}
+
+ul.ListItems {
+	margin: 0px;
+	list-style:none;
+}
+
+ul.ListItems li{
+}
+.Break {
+	border-top: 1px solid #ddd;
+	color:#222;
+	text-shadow: 1px 1px 0px #FFFFFF;
+	padding:0.8em 0.3em 0.3em 0.3em;
+	
+}
+
+
+/* Tooltip*/
+
+#tooltip
+{
+    text-align: center;
+    color: #fff;
+    background: #111;
+    position: absolute;
+    z-index: 9999;
+    padding: 8px;
+	border-radius:10px;
+}
+
+#tooltip .close {
+	position:absolute;
+	top:5px;
+	right:5px;
+	font-size:16px;
+	font-weight:bold;
+	
+}
+ 
+#tooltip:after /* triangle decoration */
+{
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid #111;
+	position: absolute;
+	left: 50%;
+	bottom: -10px;
+	margin-left: -10px;
+	content:" ";
+}
+
+#tooltip.top:after
+{
+	border-top-color: transparent;
+	border-bottom: 10px solid #111;
+	top: -20px;
+	bottom: auto;
+}
+
+#tooltip.left:after
+{
+	left: 10px;
+	margin: 0;
+}
+
+#tooltip.right:after
+{
+	right: 10px;
+	left: auto;
+	margin: 0;
+}
+.jqm ul li .element_div label.error {
+	border: none;
+    font-size: 14px;
+    height: auto;
+    left: 0;
+    padding: 3px 6px;
+    position: absolute;
+    z-index: 5;
+	width:100%;
+    color: #FFFFFF;
+	margin:2px 0px
+}
+
+.jqm ul li .element_div .ui-radio label.error,
+.jqm ul li .element_div .ui-checkbox label.error {
+	border: none;
+    font-size: 14px;
+    height: auto;
+    left: auto;
+    padding: 3px 6px;
+    position: static;
+    z-index: 5;
+	width:100%;
+    color: #FFFFFF;
+	top:auto;
+	margin:2px 0px
+}
+.jqm ul li .element_div textarea.error {
+	background-color:#fff;
+	color:inherit;
+	border:1px solid inherit;
+}
+
+.jqm ul li .element_div .small.c1.pricename{
+	width:150px;
+}
+
+@media (max-width:240px) {
+div.ui-input-text {
+    padding: 0 2px;
+}
+
+.jqm ul li .element_div .selectDropdown.medium,
+.jqm ul li .element_div .c1.medium,
+.jqm ul li .element_div .selectDropdown.small,
+.jqm ul li .element_div .c1.small,
+.jqm ul li .element_div .selectDropdown.large,
+.jqm ul li .element_div .c1.large,
+.jqm ul li .element_div span.two
+{
+	width:100%;
+}
+.jqm ul li .element_div.threeinputs span {
+    width: 23%;
+}
+.jqm ul li .element_div.fourinputs div.ui-input-text {
+    width: 38px;
+}
+.pricename div.ui-input-text{
+	width:55%;
+}
+.jqm ul li .element_div .pricename .priceN {
+    left: 0;
+    line-height: 20px;
+    margin-left: 10%;
+    position: static;
+    top: 0;
+}
+}

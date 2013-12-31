@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<title>MobileApp</title>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="MyRestro">
+<meta name="apple-itunes-app" content="app-id=">
+
+<link rel="apple-touch-icon" href="uploads/icons/152026.png">
+<link rel="apple-touch-startup-image" href="uploads/splash_shots/152026.png">
+<link rel="stylesheet" type="text/css" href="css/mobile_style.css">
+<link href="css/jquery.bxslider.css" rel="stylesheet" />
+
+
+<script src="js/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.mobile.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+
+<script type="text/javascript">
+  document.addEventListener("deviceready",onDeviceReady,false);
+  var pictureSource;   // picture source
+  var destinationType; // sets the format of returned value 
+  var imgSource;
+  var device_type="";
+   emailPhoto();     
+
+       // Cordova is ready to be used!
+       //
+       function onDeviceReady() {
+       
+           pictureSource=navigator.camera.PictureSourceType;
+           destinationType=navigator.camera.DestinationType;
+		   device_type=device.platform;
+       
+      // alert(destinationType);
+       }
+      
+       // Called when a photo is successfully retrieved
+       //
+       function onPhotoDataSuccess(imageData) {
+         
+          
+    uploadPhoto(imageData); 
+    
+        
+    
+       }
+
+       // Called when a photo is successfully retrieved
+       //
+       function onPhotoURISuccess(imageURI) {
+         
+     uploadPhoto(imageURI); 
+        
+    
+       }
+
+       // A button will call this function
+       //
+       function capturePhoto() {
+       
+         // Take picture using device camera and retrieve image as base64-encoded string
+    var popover = new CameraPopoverOptions(0, 30, 50, 100, Camera.PopoverArrowDirection.ARROW_ANY);
+     var options = {
+         quality         : 50,
+     targetHeight    : 200,
+     targetWidth   : 300,
+         destinationType : Camera.DestinationType.FILE_URI,
+         popoverOptions  : popover
+     };
+         navigator.camera.getPicture(onPhotoDataSuccess, onFail,options);
+      
+      
+       }
+
+       // A button will call this function
+       //
+       function capturePhotoEdit() {
+         // Take picture using device camera, allow edit, and retrieve image as base64-encoded string  
+         navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
+           destinationType: destinationType.DATA_URL });
+       }
+
+       // A button will call this function
+       //
+       function getPhoto(source) {
+         // Retrieve image file location from specified source
+         alert(source);
+    alert(navigator);
+         navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
+           destinationType: destinationType.FILE_URI,
+           sourceType: source });
+      
+     
+       }
+
+       // Called if something bad happens.  <a href="email_photo.html" id="" title="email_photo">email_photo</a>      // 
+       function onFail(message) {
+         alert('Failed because: ' + message);
+       }
+      function sendMail(src)
+       {
+	    var emailid=EmailPhoto;
+       var subject= subjectPhoto;
+	   var platform = device_type;
+	   if(platform == 'Android'){
+			var data="";
+			data +=' Your Image On  ( '+ src +' ) ';
+			data += DescriptionPhoto;
+			var link_send = "mailto:"+emailid+"?body="+data+"&subject="+subject;
+	   }else{
+			var data="";
+			data +='<img src="'+src+'" >';
+			data += DescriptionPhoto;
+			var link_send = "mailto:"+emailid+"?body="+data+"&subject="+subject;
+		}	
+			window.location.href = link_send;
+   
+ 
+ 
+       }
+   
+       function uploadPhoto(imageURI) 
+   {
+          var options = new FileUploadOptions();
+          options.fileKey="file";
+          options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+          var mimes = {};
+          mimes.value1 = "image/jpeg";
+          mimes.value2 = "image/jpg";
+          mimes.value3 = "image/png";
+          mimes.value4 = "image/gif";           
+          options.mimeType = mimes;
+      var params = new Object();
+          params.value1 = "test";
+          params.value2 = "param";
+                  options.params = params;
+          var ft = new FileTransfer();
+          ft.upload(imageURI, "http://198.50.99.226/~admin/emailphoto.php", win, fail, options);
+       }
+   function win(r) 
+   {
+      
+     //alert("Code = " + r.responseCode);
+     //alert("Response = " + r.response);
+    // alert("Sent = " + r.bytesSent);
+     var upload_img_src=r.response; 
+     sendMail(upload_img_src);
+   }
+
+     function fail(error) 
+       {
+       alert("An error has occurred: Code = " = error.code);
+     }
+  
+
+</script>
+
+
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header" role="banner">
+    <a href="#" data-icon="back" data-rel="back">Back</a>
+       <h1>Email Photo</h1>
+</div><!-- /header -->
+	<div data-role="content" id="main_content">
+    <div class="bg_texture-lite ui-corner-all ui-content bordertable">
+        <h3 class="align-center"><img src="images/cemera.png" alt="" width="30" align="absmiddle">&nbsp;Send Us a Photo</h3>
+	   
+	   <button data-rel="button" onclick="capturePhoto();">From Camera</button> <br/>
+	   <button data-rel="button" onClick="getPhoto(pictureSource.PHOTOLIBRARY);">From Library</button><br/><br/>
+	   <!--<button data-rel="button" onClick="sendMail();">Mail</button>-->
+
+		<div id="description"> 
+        	<p>description....<br>
+			........</p>
+        
+        </div>
+        </div>
+        
+
+
+  </div><!-- /content -->
+
+	
+
+<!-- /footer -->
+</div><!-- /page -->
+    
+</body>
+</html>

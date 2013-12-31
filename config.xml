@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.rajkumar.finaltest"
+        version   = "1.0.0">
+    <name> Tea </name>
+
+    <description>
+        Example useful features description:
+- View our delicious food menu on the go
+- Stay up to date with our restaurant at anytime
+- Unlock coupon rewards for frequent visits
+- Receive exclusive mobile coupons
+- Email us photos to appear inside our restaurant
+    </description>
+
+    <author href="http://sumedhasoftech.com" email="mail@sumedhasoftech.com">
+        Sumedha Softech
+    </author>
+	<access origin="*" />
+	<gap:plugin name="com.phonegap.plugins.barcodescanner" />
+	<gap:plugin name="com.phonegap.plugins.pushplugin" version="1.3.7" />
+	<gap:plugin name="com.phonegap.plugins.facebookconnect">
+		<param name="APP_ID" value="687342247948239" />
+		<param name="APP_NAME" value="MyFirstApp" />
+     </gap:plugin>
+    
+    <feature name="http://api.phonegap.com/1.0/device" />
+	<feature name="http://api.phonegap.com/1.0/battery"/>
+	<feature name="http://api.phonegap.com/1.0/camera"/> 
+	<feature name="http://api.phonegap.com/1.0/contacts"/>
+	<feature name="http://api.phonegap.com/1.0/file"/> 
+	<feature name="http://api.phonegap.com/1.0/geolocation"/> 
+	<feature name="http://api.phonegap.com/1.0/media"/>
+	<feature name="http://api.phonegap.com/1.0/network"/>
+	<feature name="http://api.phonegap.com/1.0/notification"/>
+
+    <preference name="phonegap-version" value="2.9.0" />
+    <preference name="orientation"      value="portrait" />
+    <preference name="target-device"    value="universal" />
+    <preference name="fullscreen"       value="false" />
+    <preference name="webviewbounce"    value="true" />
+    <preference name="stay-in-webview" value="true" />
+	<preference name="prerendered-icon" value="false"/>
+
+    <icon src="icon.png" />
+    <icon src="res/icon/android/_app_icon_32x32.png"   gap:platform="android"    gap:density="ldpi" />
+    <icon src="res/icon/android/_app_icon_48x48.png"   gap:platform="android"    gap:density="mdpi" />
+    <icon src="res/icon/android/_app_icon_72x72.png"   gap:platform="android"    gap:density="hdpi" />
+    <icon src="res/icon/android/_app_icon_96x96.png"  gap:platform="android"    gap:density="xhdpi" />
+   <icon src="res/icon/ios/_app_icon_57x57.png"     gap:platform="ios"        width="57" height="57" />
+    <icon src="res/icon/ios/_app_icon_72x72.png"     gap:platform="ios"        width="72" height="72" />
+    <icon src="res/icon/ios/_app_icon_114x114.png"     gap:platform="ios"        width="114" height="114" />
+    
+
+    <gap:splash src="res/screen/android/mob_splash/splash_screen_420x320.png"  	gap:platform="android" gap:density="ldpi" />
+    <gap:splash src="res/screen/android/ip5_splash/splash_screen470x320.png"  	gap:platform="android" gap:density="mdpi" />
+    <gap:splash src="res/screen/android/ipad_splash/splash_screen640x480.png"  	gap:platform="android" gap:density="hdpi" />
+    <gap:splash src="res/screen/android/ipad_splash/splash_screen640x480.png" 	gap:platform="android" gap:density="xhdpi" />
+    <gap:splash src="res/screen/ios/mob_splash/splash_screen_320x480.png"    	gap:platform="ios"     width="320" height="480" />
+    <gap:splash src="res/screen/ios/ip5_splash/splash_screen640x960.png" 		gap:platform="ios"     width="640" height="960" />
+    <gap:splash src="res/screen/ios/ipad_splash/splash_screen768x1024.png"      gap:platform="ios"     width="768" height="1024" />
+    
+    
+	
+	
+</widget>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mobile App</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/mobile_style.css">
+    <link rel="stylesheet" type="text/css" href="css/photoswipe.css">
+    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <style type="text/css">
+        .ui-page
+        {
+            -webkit-backface-visibility: hidden;
+        }
+
+        .icon_img
+        {
+            display: block;
+            text-align: center;
+        }
+		#red {
+    float: left;
+    clear: left;
+    width: 300px;
+    margin: 15px;
+  }
+  #red .ui-slider-range { background: #ef2929; }
+  #red .ui-slider-handle { border-color: #ef2929; }
+  
+    </style>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile.js"></script>
+    <script type="text/javascript" src="js/modernizr-2.0.6.min.js"></script>
+    <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.header-content .back').hide();
+            var no_of_coupon=$('#no_of_coupon').val();
+			var featureRelId = getUrlVars()['transferId'];
+					var userSiteId 	 = getUrlVars()['touchId'];
+					var featureId 	 = getUrlVars()['mId'];
+					var tabid 		 = getUrlVars()['tabid'];
+            couponloyaltyInfo($('#done').val());
+			
+				
+				
+            $("html").niceScroll();
+             
+				$('#submt').click(function () {
+				
+				var secretcode=$('#secretcode').val();
+				var enteredCode=$('#enteredCode').val();
+				
+				if(secretcode == enteredCode){
+				var rand_no=0;
+				var sess_ida= 0;
+				var today = new Date();
+				var tomorrow = new Date(today.getTime() + 8640000000);
+				rand_no= 1+(Math.random() * 6);
+				if($.cookie("loylty_session_id"))
+				{
+					sess_ida = $.cookie("loylty_session_id");
+				}
+				else
+				{
+					$.cookie("loylty_session_id", rand_no, {expires: tomorrow});
+					sess_ida = $.cookie("loylty_session_id");
+				}
+					
+					
+					var url	=	baseUrl + 'web/web/setloyalty_result/' + featureId + '/' + featureRelId + '/' + userSiteId + '/' +tabid+ '/' +sess_ida;
+					
+					doAjaxCall(url,'',false,function(html){
+							
+							$('#enteredCode').val();
+							var no_of_coupon	=	parseInt($('#no_of_coupon').val());	
+							var counter			=	parseInt(html[0].count);
+							var totalper		=	parseInt(counter*100/no_of_coupon);
+							
+							$( "#red" ).slider( "value", totalper );								
+					});
+			
+				
+				var select=$('#done').val();
+				select++;
+				$('#done').val(select);
+				for(var i=1;i<=select;i++){
+				
+				var data = '<img src="images/cop_close.png"  height="40" width="40" class="loyalityimage"/>';
+				$('#'+i).html(data);
+				
+				}
+				}else{
+				alert('Secret Code is Wrong');
+				}
+				});  
+				  $( "#red" ).slider({
+					  range: "min",
+					  value: 0,
+					  min: 0,
+					  max: 100,
+					  slide: function( event, ui ) {
+						$( "#red" ).val( "$" + ui.value );
+					  }
+					});
+			
+		
+		});
+	
+		function changeSliderVals(counts){
+			var no_of_coupon	=	parseInt($('#no_of_coupon').val());
+				
+			var counter			=	parseInt(counter);	
+			alert(counter);
+			var totalper		=	parseInt(counter*100/no_of_coupon);
+			$( "#red" ).slider( "value", totalper );
+		}
+	
+    </script>
+</head>
+<body>
+    <input type="hidden" id="userSiteId" value="">
+	<input type="hidden" id="no_of_coupon" value="0">
+    <input type="hidden" id="lastClick" value="">
+    <a id="addSteps" href="#fanwallPopup" onclick="" data-position-to="window" data-rel="popup"></a>
+    <input type="hidden" id="BackSteps" value="1">
+	<input type="hidden" id="done" value="0">
+	<input type="hidden" id="secretcode" value="0">
+    <div data-role="page">
+        <div data-role="header" role="banner" class="header-content">
+              <a data-rel="back" data-role="button" data-icon="arrow-l">Back</a>
+            <h1>Loyality Tab Information</h1>
+            <a href="index.html" data-icon="home" data-ajax="false" class="ui-btn-right">Home</a>
+        </div>
+        <!-- /header -->
+
+
+        <div data-role="content" class="align-center" id="main-content">
+		    <div class="bg_texture-lite ui-corner-all ui-content bordertable">
+        <h3 class="align-center" id="CouponName">Send Us a Photo</h3>
+		 <div  id="CouponImage"></div>
+		 <div id="red"></div>
+		   <span id="barbox" style="display: inline-block;"></span>
+
+		<div id="description"> 
+        	Please hand your mobile device to the business representative who will stamp your loyality.
+        
+        </div>
+		
+		 <a href="javascript:#stamp"  data-position-to="window" data-inline="true" data-rel="popup" data-role="button" >Stamp Pad</a>
+        </div>
+           <div data-role="popup" id="stamp" data-overlay-theme="a" data-theme="c" class="ui-corner-all" data-dismissible="false"><div data-role="header" data-theme="b" class="ui-corner-top ui-header ui-bar-b" role="banner"><h1 class="ui-title" role="heading" aria-level="1">Secret Code</h1></div><div data-role="content" data-theme="d" class="ui-corner-bottom ui-content"><h3 class="ui-title">Please hand your mobile device to the business representative who will stamp your card.</h3><input type="password" id="enteredCode"> <fieldset class="ui-grid-a">  <div class="ui-block-a"> <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a></div>
+    <div class="ui-block-b"><a href="javascript:" data-rel="back"  data-role="button" data-inline="true" id="submt" data-theme="c">Submit</a></div></fieldset ></div></div>
+
+
+        </div>
+        <!-- /content -->
+    </div>
+    <!-- /page -->
+<script>
+	$(document).ready(function(){
+			var featureRelId = getUrlVars()['transferId'];
+					var userSiteId 	 = getUrlVars()['touchId'];
+					var featureId 	 = getUrlVars()['mId'];
+					var tabid 		 = getUrlVars()['tabid'];
+		if($.cookie("loylty_session_id"))
+				{
+					sess_ida = $.cookie("loylty_session_id");
+					var url	=	baseUrl + 'web/web/setloyalty_result/' + featureId + '/' + featureRelId + '/' + userSiteId + '/' +tabid+ '/' +sess_ida;
+					doAjaxCall(url,'',false,function(html){
+						
+							$('#enteredCode').val();
+							var no_of_coupon	=	parseInt($('#no_of_coupon').val());	
+							var counter			=	parseInt(html[0].count);
+							var totalper		=	parseInt(counter*100/no_of_coupon);
+							alert(totalper);
+							$( "#red" ).slider( "value", totalper );								
+					});
+				}
+	})
+</script>
+</body>
+</html>
